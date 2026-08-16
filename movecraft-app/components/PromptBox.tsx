@@ -2,14 +2,21 @@
 
 import Button from "./Button"
 
-export default function PromptBox() {
+type PromptBoxProps = {
+    prompt: string
+    onGenerate: () => void
+}
+
+export default function PromptBox({ prompt, onGenerate }: PromptBoxProps) {
     return (
         <form action="" className=" flex flex-col  p-3 m-5 rounded-lg border-2 border-slate-200">
             <div className="flex justify-center items-center">
-                <input type="text" placeholder="Patellar tendinopathy loading program" className="grow bg-slate-200 rounded-md p-2 m-2" />
-                <Button variant="primary">Generate Workout</Button>
+                <div className="flex grow justify-center items-center bg-slate-200 p-3 rounded-lg">
+                    <input type="text" placeholder="Patellar tendinopathy loading program" className="grow bg-slate-200" />
+                    <Button variant="primary">Generate Workout</Button>
+                </div>
             </div>
-            <h3 className="m-2">You can ask for workouts with warmups.</h3>
+            <h3 className="m-2 text-slate-500">Ask for anything! AI will give you an organized list of exercises and details.</h3>
         </form>
     )
 }

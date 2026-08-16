@@ -12,7 +12,6 @@ export default function WorkoutEditor() {
                 <h1 className="text-lg">Actions:</h1>
                 <div className="flex gap-2"><Button variant="primary">Save Workout</Button>
                     <Button variant="edit">Edit</Button></div>
-
             </div>
 
             <h1 className="text-3xl font-bold">Workout: {workoutName}</h1>
