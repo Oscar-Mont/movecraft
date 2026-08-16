@@ -14,7 +14,6 @@ export default function WorkoutBuilderPage() {
 
             <h2 className="mx-5 text-slate-800">Ask AI for daily workouts to share with your clients.</h2>
             <WorkoutBuilderClient></WorkoutBuilderClient>
-
         </div>
     )
 }
