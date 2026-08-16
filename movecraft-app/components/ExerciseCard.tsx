@@ -1,7 +1,5 @@
 'use client'
 
-import Button from "./Button";
-
 type ExerciseCardProps = {
     type: string
     name: string
@@ -9,9 +7,10 @@ type ExerciseCardProps = {
     setsAndReps: string
     load: string
     additionalNotes: string
+    linkToVideo: string
 };
 
-export default function ExerciseCard({ type, name, description, setsAndReps, load, additionalNotes }: ExerciseCardProps) {
+export default function ExerciseCard({ type, name, description, setsAndReps, load, additionalNotes, linkToVideo }: ExerciseCardProps) {
     return (
         <div className="border-2 border-slate-200 p-3 m-4 rounded-lg">
             <div className="flex flex-col items-start justify-center gap-2 ">
@@ -26,6 +25,10 @@ export default function ExerciseCard({ type, name, description, setsAndReps, loa
                     <p>{load}</p>
                     <h3 className="text-slate-500">Notes</h3>
                     <p>{additionalNotes}</p>
+                    <h3 className="text-slate-500">Video</h3>
+                    <a href={linkToVideo} target="_blank" rel="noreferrer" className="text-blue-600 underline">
+                        Watch demonstration video
+                    </a>
                 </div>
             </div>
 
