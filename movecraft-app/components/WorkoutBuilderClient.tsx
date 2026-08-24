@@ -5,11 +5,14 @@ import PromptBox from "./PromptBox";
 import WorkoutEditor from "./WorkoutEditor";
 
 export default function WorkoutBuilderClient() {
-    const [prompt, setPrompt] = useState("")
-    const [hasWorkout, setHasWorkout] = useState(false)
+    const [prompt, setPrompt] = useState("");
+    const [hasWorkout, setHasWorkout] = useState(true);
 
     function handleGenerate(): void {
-        setHasWorkout(true)
+        setHasWorkout(true);
+        //code to call the server action
+        //generateWorjoutAction(prompt)
+        //how will the action receive the prompt if that is on promptbox component?
     }
 
     return (

@@ -5,7 +5,7 @@ import Button from "./Button"
 type PromptBoxProps = {
     prompt: string
     onGenerate: () => void
-}
+};
 
 export default function PromptBox({ prompt, onGenerate }: PromptBoxProps) {
     return (

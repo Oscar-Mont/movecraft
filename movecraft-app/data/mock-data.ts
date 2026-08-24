@@ -1,21 +1,10 @@
-type ExerciseType = "Warm-up" | "Workout" | "Finisher" | "Cooldown";
+import { Exercise } from "@/types/Exercise";
 
-type Exercise = {
-    type: ExerciseType;
-    name: string;
-    description: string;
-    setsAndReps: string;
-    load: string;
-    additionalNotes: string;
-    linkToVideo: string;
-};
-
-export const workoutName = "Isometric Tendon Strenghtening"
-export const description = "A simple workout description"
+export const workoutName = "Isometric Tendon Strenghtening";
+export const description = "A simple workout description";
 
 export const mockWorkoutPlan: Exercise[] = [
     {
-        type: "Warm-up",
         name: "Arm Circles",
         description: "Gentle shoulder mobility drill to warm up the upper body.",
         setsAndReps: "2 x 12 each direction",
@@ -24,7 +13,6 @@ export const mockWorkoutPlan: Exercise[] = [
         linkToVideo: "https://www.youtube.com/watch?v=4j6iU4B3G3A"
     },
     {
-        type: "Warm-up",
         name: "Bodyweight Squats",
         description: "Activates the lower body and prepares the knees and hips.",
         setsAndReps: "2 x 15",
@@ -33,7 +21,6 @@ export const mockWorkoutPlan: Exercise[] = [
         linkToVideo: "https://www.youtube.com/watch?v=aclHkVaku9U"
     },
     {
-        type: "Workout",
         name: "Goblet Squat",
         description: "A compound lower-body movement that builds strength and stability.",
         setsAndReps: "4 x 10",
@@ -42,7 +29,6 @@ export const mockWorkoutPlan: Exercise[] = [
         linkToVideo: "https://www.youtube.com/watch?v=MeI6QJ4aN5M"
     },
     {
-        type: "Workout",
         name: "Push-Ups",
         description: "Upper-body pressing movement targeting chest, shoulders, and triceps.",
         setsAndReps: "3 x 12",
@@ -51,7 +37,6 @@ export const mockWorkoutPlan: Exercise[] = [
         linkToVideo: "https://www.youtube.com/watch?v=IODxDxX7oi4"
     },
     {
-        type: "Workout",
         name: "Bent-Over Row",
         description: "Back-focused strength exercise that improves posture and pulling power.",
         setsAndReps: "4 x 10",
@@ -60,7 +45,6 @@ export const mockWorkoutPlan: Exercise[] = [
         linkToVideo: "https://www.youtube.com/watch?v=9M6kFvK0VqM"
     },
     {
-        type: "Finisher",
         name: "Jumping Lunges",
         description: "High-intensity conditioning movement to finish strong.",
         setsAndReps: "3 x 20 total reps",
@@ -69,7 +53,6 @@ export const mockWorkoutPlan: Exercise[] = [
         linkToVideo: "https://www.youtube.com/watch?v=zhvA7DC9Ld8"
     },
     {
-        type: "Cooldown",
         name: "Standing Hamstring Stretch",
         description: "Lengthens the posterior chain and reduces tightness after training.",
         setsAndReps: "2 x 30 seconds per side",

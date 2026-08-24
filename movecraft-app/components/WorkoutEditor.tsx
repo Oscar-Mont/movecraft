@@ -19,8 +19,7 @@ export default function WorkoutEditor() {
             <div>
                 {mockWorkoutPlan.map((exercise) => {
                     return (<ExerciseCard
-                        key={`${exercise.type}-${exercise.name}`}
-                        type={exercise.type}
+                        key={`${exercise.name}-${exercise.load}`}
                         name={exercise.name}
                         description={exercise.description}
                         setsAndReps={exercise.setsAndReps}
