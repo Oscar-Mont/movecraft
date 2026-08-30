@@ -7,10 +7,10 @@ export default function WorkoutBuilderPage() {
             <div className="flex gap-3 m-5">
                 <Link href="/dashboard">DASHBOARD</Link>
                 <p> | </p>
-                <h1 className="text-blue-500">WORKOUT BUILDER</h1>
+                <h1 className="text-emerald-300">WORKOUT BUILDER</h1>
             </div>
 
-            <h2 className="mx-5 text-slate-800">Ask AI for daily workouts to share with your clients.</h2>
+            <h2 className="mx-5">Pide una rutina de ejercicio. Recuerda ser lo más específico que puedas y no ingresar información privada de tus pacientes o clientes.</h2>
             <WorkoutBuilderClient></WorkoutBuilderClient>
         </div>
     )

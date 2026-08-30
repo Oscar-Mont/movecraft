@@ -17,12 +17,12 @@ export default function Button({ variant, children }: ButtonProps) {
 
 function applyVariant(variant: string) {
     if (variant === "primary") {
-        return "bg-blue-500 rounded-md p-2 text-white"
+        return "bg-emerald-500 rounded-md p-2 text-white"
     }
     if (variant === "secondary") {
         return "bg-slate-100 rounded-md p-2 text-black"
     }
     if (variant === "edit") {
-        return "bg-green-200 rounded-md p-2 text-black px-8"
+        return "bg-cyan-400 rounded-md p-2 text-black px-8"
     }
 }

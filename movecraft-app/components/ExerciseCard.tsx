@@ -4,21 +4,19 @@ import { Exercise } from "@/types/Exercise";
 
 export default function ExerciseCard({ name, description, setsAndReps, load, additionalNotes }: Exercise) {
     return (
-        <div className="border-2 border-slate-200 p-3 m-4 rounded-lg">
-            <div className="flex flex-col items-start justify-center gap-2 ">
-                <div className="flex flex-col items-start jsutify-center">
+        <div className="border-l-5 border-dotted border-emerald-300 pl-5 mt-1">
+            <div className="flex flex-col items-start justify-center gap-2">
+                <div className="flex flex-col items-start jsutify-center mb-10 gap-1">
                     {/* <p className={applyTypeStyle(category)}>{category}</p> */}
-                    <h2 className="text-xl font-bold">{name}</h2>
-                    <p className="text-slate-500">{description}</p>
+                    <h2 className="text-2xl font-bold text-emerald-300">{name}</h2>
+                    <p className="">{description}</p>
 
-                    <h3 className="text-slate-500">Sets & Reps</h3>
+                    <h3 className="font-bold text-xl text-emerald-300">Sets & Reps</h3>
                     <p>{setsAndReps}</p>
-                    <h3 className="text-slate-500">Load</h3>
+                    <h3 className="font-bold text-xl text-emerald-300">Load</h3>
                     <p>{load}</p>
-                    <h3 className="text-slate-500">Notes</h3>
+                    <h3 className="font-bold text-xl text-emerald-300">Notes</h3>
                     <p>{additionalNotes}</p>
-                    <h3 className="text-slate-500">Video</h3>
-
                 </div>
             </div>
 
