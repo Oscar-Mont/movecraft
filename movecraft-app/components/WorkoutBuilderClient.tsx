@@ -5,6 +5,7 @@ import PromptBox from "./PromptBox";
 import WorkoutEditor from "./WorkoutEditor";
 import { generateWorkoutAction } from "@/actions/ai.actions";
 import { Workout } from "@/types/Workout";
+import { mockWorkoutPlan } from "@/data/mock-data";
 
 export default function WorkoutBuilderClient() {
     const [workout, setWorkout] = useState<Workout | null>(null);
@@ -12,6 +13,12 @@ export default function WorkoutBuilderClient() {
     const [error, setError] = useState<string | null>(null);
 
     async function handleGenerate(prompt: string): Promise<void> {
+        const testing = true;
+        if (testing) {
+            setWorkout(mockWorkoutPlan);
+            return;
+        }
+
         setIsGenerating(true);
         setError(null);
 
