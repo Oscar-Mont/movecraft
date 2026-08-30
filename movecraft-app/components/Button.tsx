@@ -23,6 +23,6 @@ function applyVariant(variant: string) {
         return "bg-slate-100 rounded-md p-2 text-black hover:bg-blue-500"
     }
     if (variant === "edit") {
-        return "bg-cyan-400 rounded-md p-2 text-black px-8"
+        return "bg-cyan-400 rounded-md p-2 text-black px-8 hover:bg-cyan-800"
     }
 }
