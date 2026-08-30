@@ -1,6 +1,7 @@
 'use server'
 
 import { GoogleGenAI } from "@google/genai";
+import type { Workout } from "@/types/Workout";
 
 //INITIALIZE SDK WITH API KEY
 const ai = new GoogleGenAI({});
@@ -42,11 +43,10 @@ const workoutSchema = {
                     },
                     additionalNotes: {
                         type: "string",
-                        description: "Añade precauciones, aspactos del ejercicio a cuidar y cualquier otra nota importante. Puedes añadir el tempo de los ejercicios aqui mismo, por ejemplo: subir 2 segundos, mantener 2 segundos y bajar 2 segundos."
+                        description: "Añade precauciones, aspectos del ejercicio a cuidar y cualquier otra nota importante. Puedes añadir el tempo de los ejercicios aqui mismo, por ejemplo: subir 2 segundos, mantener 2 segundos y bajar 2 segundos."
                     }
                 },
                 required: [
-                    "type",
                     "name",
                     "description",
                     "setsAndReps",
@@ -65,30 +65,39 @@ Eres un sistema experto en fisioterapia deportiva, kinesiología y prescripción
 Directrices estrictas que DEBES seguir:
 1. Seguridad y Criterio Clínico: Si el usuario indica alguna lesión activa, dolor agudo o restricción médica, debes adaptar los ejercicios o sugerir alternativas de bajo impacto / rangos de movimiento seguros. Nunca prescribas ejercicios contraindicados para la patología mencionada.
 2. Dosificación Precisa: Cada ejercicio debe incluir parámetros claros.
-3. Estructura Lógica: Toda rutina debe dividirse obligatoriamente en fases lógicas: 
+3. Estructura Lógica: Toda rutina debe dividirse obligatoriamente en fases lógicas a menos que se de la situaciíon de la regla 5: 
    - Fase 1: Calentamiento: añade ejercicios de activacion o movilidad.
    - Fase 2: Workout principal: añade ejercicios que trabajen específicamente lo que te solicite el usuario.
    - Fase 3: Enfriamiento: añade ejercicios de estiramientos o de movilidad con la intención de volver a la calma.
 4. Claridad en la terminología: Utiliza nombres de ejercicios claros y estándar (preferiblemente en español con su equivalente común o técnico).
-5. Si el usuario se identifica como un fisioterapeuta, o hace referencia a que la rutina de ejercicios se aplicará para alguien con alguna lesión: solamente agrega ejercicios de la categoria Workout Principal y considera que estos pueden ser estiramientos, ejercicios de fuerza, ejercicios de propiocepción, equilibrio y cualquier otro. Siempre básate en el prompt del usuario para decidir qué tipo de ejercicios utilizar.
+5. Si el usuario te pide únicamente ejercicios de un tipo, como movilidad o estiramientos, considera solamente darle dicha lista, sin tener que consdierar calentamiento, workout y enfriamiento.
 6. Tu respuesta debe ajustarse estrictamente a la estructura JSON solicitada, sin texto adicional fuera del formato.
 `;
 
 //WORKOUT GENERATOR SERVER ACTION
-export async function generateWorkoutAction(prompt: string) {
+export async function generateWorkoutAction(prompt: string): Promise<Workout> {
     //add try catch block
-    const response = await ai.interactions.create({
-        model: "gemini-3.1-flash-lite",
-        input: prompt,
-        system_instruction: systemInstruction,
-        response_format: {
-            type: 'text',
-            mime_type: 'application/json',
-            schema: workoutSchema
-        },
-    });
-    return response;
+    try {
+        const response = await ai.interactions.create({
+            model: "gemini-3.1-flash-lite",
+            input: prompt,
+            system_instruction: systemInstruction,
+            response_format: {
+                type: 'text',
+                mime_type: 'application/json',
+                schema: workoutSchema
+            },
+        });
+
+        if (!response.output_text) {
+            throw new Error("Gemini returned an empty response")
+        }
+        const parsedWorkout = JSON.parse(response.output_text) as Workout;
+        return parsedWorkout;
+
+    } catch (error) {
+        console.error(error);
+        throw new Error("Failed to generate workout.");
+    }
+
 }
-
-//delete
-

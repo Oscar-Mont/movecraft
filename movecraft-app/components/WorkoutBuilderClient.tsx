@@ -3,22 +3,35 @@
 import { useState } from "react";
 import PromptBox from "./PromptBox";
 import WorkoutEditor from "./WorkoutEditor";
+import { generateWorkoutAction } from "@/actions/ai.actions";
+import { Workout } from "@/types/Workout";
 
 export default function WorkoutBuilderClient() {
-    const [hasWorkout, setHasWorkout] = useState(true);
+    const [workout, setWorkout] = useState<Workout | null>(null);
+    const [isGenerating, setIsGenerating] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
-    function handleGenerate(prompt: string): void {
-        console.log(prompt);
-        //code to call the server action
-        //generateWorjoutAction(prompt)
-        //how will the action receive the prompt if that is on promptbox component?
+    async function handleGenerate(prompt: string): Promise<void> {
+        setIsGenerating(true);
+        setError(null);
+
+        try {
+            const generatedWorkout = await generateWorkoutAction(prompt);
+            setWorkout(generatedWorkout);
+        } catch (error) {
+            console.error(error);
+            setError("Something went wrong while generating the workout");
+        } finally {
+            setIsGenerating(false);
+        }
     }
 
     return (
         <div className="flex flex-col">
             <PromptBox onGenerate={handleGenerate}></PromptBox>
-            <WorkoutEditor></WorkoutEditor>
-
+            {isGenerating && <p>Generating Workout...</p>}
+            {error && <p>{error}</p>}
+            {workout && <WorkoutEditor workout={workout}></WorkoutEditor>}
         </div>
     )
 }

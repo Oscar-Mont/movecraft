@@ -1,10 +1,14 @@
 'use client'
 
 import Button from "./Button"
-import { workoutName, description, mockWorkoutPlan } from "@/data/mock-data"
 import ExerciseCard from "./ExerciseCard"
+import { Workout } from "@/types/Workout"
 
-export default function WorkoutEditor() {
+type WorkoutEditorProps = {
+    workout: Workout;
+}
+
+export default function WorkoutEditor({ workout }: WorkoutEditorProps) {
     return (
         <div className="flex flex-col m-5 gap-2">
 
@@ -14,12 +18,12 @@ export default function WorkoutEditor() {
                     <Button variant="edit">Edit</Button></div>
             </div>
 
-            <h1 className="text-3xl font-bold">Workout: {workoutName}</h1>
-            <p>{description}</p>
+            <h1 className="text-3xl font-bold">Workout: {workout.workoutName}</h1>
+            <p>{workout.description}</p>
             <div>
-                {mockWorkoutPlan.map((exercise) => {
+                {workout.exercises.map((exercise, index) => {
                     return (<ExerciseCard
-                        key={`${exercise.name}-${exercise.load}`}
+                        key={`${exercise.name}-${index}`}
                         name={exercise.name}
                         description={exercise.description}
                         setsAndReps={exercise.setsAndReps}
