@@ -5,7 +5,7 @@ export default function WorkoutBuilderPage() {
     return (
         <div className="flex flex-col">
             <div className="flex gap-3 m-5">
-                <Link href="/dashboard">DASHBOARD</Link>
+                <Link href="/dashboard" className="hover:text-emerald-300">DASHBOARD</Link>
                 <p> | </p>
                 <h1 className="text-emerald-300">WORKOUT BUILDER</h1>
             </div>
