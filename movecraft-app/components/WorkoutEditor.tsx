@@ -25,7 +25,7 @@ export default function WorkoutEditor() {
                         setsAndReps={exercise.setsAndReps}
                         load={exercise.load}
                         additionalNotes={exercise.additionalNotes}
-                        linkToVideo={exercise.linkToVideo}></ExerciseCard>)
+                    ></ExerciseCard>)
                 })}
             </div>
 

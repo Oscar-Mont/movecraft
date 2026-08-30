@@ -5,5 +5,4 @@ export type Exercise = {
     setsAndReps: string;
     load: string;
     additionalNotes: string;
-    linkToVideo: string;
 };

@@ -1,6 +1,4 @@
-import PromptBox from "@/components/PromptBox";
 import WorkoutBuilderClient from "@/components/WorkoutBuilderClient";
-import WorkoutEditor from "@/components/WorkoutEditor";
 import Link from "next/link";
 
 export default function WorkoutBuilderPage() {

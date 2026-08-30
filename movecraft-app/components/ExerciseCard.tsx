@@ -1,15 +1,8 @@
 'use client'
 
-type ExerciseCardProps = {
-    name: string
-    description: string
-    setsAndReps: string
-    load: string
-    additionalNotes: string
-    linkToVideo: string
-};
+import { Exercise } from "@/types/Exercise";
 
-export default function ExerciseCard({ name, description, setsAndReps, load, additionalNotes, linkToVideo }: ExerciseCardProps) {
+export default function ExerciseCard({ name, description, setsAndReps, load, additionalNotes }: Exercise) {
     return (
         <div className="border-2 border-slate-200 p-3 m-4 rounded-lg">
             <div className="flex flex-col items-start justify-center gap-2 ">
@@ -25,9 +18,7 @@ export default function ExerciseCard({ name, description, setsAndReps, load, add
                     <h3 className="text-slate-500">Notes</h3>
                     <p>{additionalNotes}</p>
                     <h3 className="text-slate-500">Video</h3>
-                    <a href={linkToVideo} target="_blank" rel="noreferrer" className="text-blue-600 underline">
-                        Watch demonstration video
-                    </a>
+
                 </div>
             </div>
 

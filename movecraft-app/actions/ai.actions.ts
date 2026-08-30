@@ -24,10 +24,6 @@ const workoutSchema = {
             items: {
                 type: "object",
                 properties: {
-                    category: {
-                        type: "string",
-                        description: "Categoría del ejercicio: Warm-up, Workout y Cooldown."
-                    },
                     name: {
                         type: "string",
                         description: "Nombre del ejercicio."
@@ -80,6 +76,7 @@ Directrices estrictas que DEBES seguir:
 
 //WORKOUT GENERATOR SERVER ACTION
 export async function generateWorkoutAction(prompt: string) {
+    //add try catch block
     const response = await ai.interactions.create({
         model: "gemini-3.1-flash-lite",
         input: prompt,
