@@ -2,6 +2,7 @@
 
 import { GoogleGenAI } from "@google/genai";
 import type { Workout } from "@/types/Workout";
+import * as z from "zod";
 
 //INITIALIZE SDK WITH API KEY
 const ai = new GoogleGenAI({});
@@ -59,6 +60,22 @@ const workoutSchema = {
     required: ["workoutName", "description", "exercises"]
 }
 
+//DEFINE ZOD SCHEMA FOR VALIDATION
+const ExerciseSchema = z.object({
+    name: z.string(),
+    description: z.string(),
+    setsAndReps: z.string(),
+    load: z.string(),
+    additionalNotes: z.string(),
+});
+
+const WorkoutSchema = z.object({
+    workoutName: z.string(),
+    description: z.string(),
+    exercises: z.array(ExerciseSchema),
+});
+
+//DEFINE SYSTEM INSTRUCTION FOR AI MODEL
 const systemInstruction: string = `
 Eres un sistema experto en fisioterapia deportiva, kinesiología y prescripción de ejercicio físico con más de 10 años de experiencia clínica. Tu objetivo es generar rutinas de ejercicio altamente estructuradas, seguras y adaptadas a las necesidades específicas del usuario o paciente, siguiendo el esquema especificado.
 
@@ -70,7 +87,7 @@ Directrices estrictas que DEBES seguir:
    - Fase 2: Workout principal: añade ejercicios que trabajen específicamente lo que te solicite el usuario.
    - Fase 3: Enfriamiento: añade ejercicios de estiramientos o de movilidad con la intención de volver a la calma.
 4. Claridad en la terminología: Utiliza nombres de ejercicios claros y estándar (preferiblemente en español con su equivalente común o técnico).
-5. Si el usuario te pide únicamente ejercicios de un tipo, como movilidad o estiramientos, considera solamente darle dicha lista, sin tener que consdierar calentamiento, workout y enfriamiento.
+5. Si el usuario te pide únicamente ejercicios de un tipo, como movilidad o estiramientos, considera solamente darle dicha lista, sin tener que considerar calentamiento, workout y enfriamiento.
 6. Tu respuesta debe ajustarse estrictamente a la estructura JSON solicitada, sin texto adicional fuera del formato.
 `;
 
@@ -92,8 +109,8 @@ export async function generateWorkoutAction(prompt: string): Promise<Workout> {
         if (!response.output_text) {
             throw new Error("Gemini returned an empty response")
         }
-        const parsedWorkout = JSON.parse(response.output_text) as Workout;
-        return parsedWorkout;
+        //parse the response using zod schema
+        return WorkoutSchema.parse(JSON.parse(response.output_text));
 
     } catch (error) {
         console.error(error);
